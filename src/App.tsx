@@ -1,5 +1,6 @@
 import { Flex } from "@chakra-ui/react";
 import CardItem from "./CardItem";
+import { useState } from "react";
 
 const data = [
   {
@@ -47,6 +48,11 @@ const data = [
 export type DataType = (typeof data)[0];
 
 function App() {
+  const [items, setItems] = useState(data);
+  const handleRemoveItem = (id: number) => {
+    setItems((prevItems) => prevItems.filter((item) => item.id !== id));
+  };
+
   return (
     <Flex
       direction="column"
@@ -58,7 +64,7 @@ function App() {
       <h2>OUR TOUR</h2>
       <Flex wrap="wrap" gap="15px" justify="start" w="full" px="50px">
         {data.map((item, index) => (
-          <CardItem key={index} item={item}  />
+          <CardItem key={index} item={item} onRemove={handleRemoveItem} />
         ))}
       </Flex>
     </Flex>

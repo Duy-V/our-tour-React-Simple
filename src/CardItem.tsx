@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { DataType } from "./App";
 import {
-  ButtonGroup,
   Card,
   CardBody,
   Divider,
@@ -16,8 +15,9 @@ import {
 import { CardFooter } from "@chakra-ui/react";
 type CardItemProps = {
   item: DataType;
+  onRemove: (id: number) => void;
 };
-const CardItem: React.FC<CardItemProps> = ({ item }) => {
+const CardItem: React.FC<CardItemProps> = ({ item, onRemove }) => {
   const [showMore, setShowMore] = useState<boolean>(false);
 
   const handleShowMore = () => {
@@ -64,6 +64,7 @@ const CardItem: React.FC<CardItemProps> = ({ item }) => {
             colorScheme="white"
             color="green"
             borderColor="green"
+            onClick={() => onRemove(item.id)}
           >
             Not interesting
           </Button>
